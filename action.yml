@@ -1,5 +1,5 @@
 name: "Test Suite Docker Executor"
-description: "Run Containers A and B that create 3 containers each."
+description: "Run Containers A and B that create 3 child containers each."
 
 inputs:
   test_suites:
@@ -8,7 +8,7 @@ inputs:
 
 runs:
   using: "docker"
-  image: "docker:latest"  # Using official Docker image to run containers
+  image: "docker:latest"  # Using the official Docker image
   env:
     DOCKER_HOST: "unix:///var/run/docker.sock"
-  entrypoint: ["sh", "/action/entrypoint.sh"]
+  entrypoint: "/bin/sh /action/entrypoint.sh"  # Corrected entrypoint as a string
