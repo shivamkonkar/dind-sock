@@ -1,0 +1,14 @@
+name: "Test Suite Docker Executor"
+description: "Run Containers A and B that create 3 containers each."
+
+inputs:
+  test_suites:
+    description: "Comma-separated list of test suites to run"
+    required: true
+
+runs:
+  using: "docker"
+  image: "docker:latest"  # Using official Docker image to run containers
+  env:
+    DOCKER_HOST: "unix:///var/run/docker.sock"
+  entrypoint: ["sh", "/action/entrypoint.sh"]
