@@ -1,1 +1,23 @@
+name: Run Containers A and B
 
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:  # Manual trigger
+
+jobs:
+  run-containers:
+    runs-on: ubuntu-latest  # Runs on Ubuntu GitHub runner
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Docker
+        uses: docker/setup-buildx-action@v2
+
+      - name: Run Containers A and B using Docker.sock
+        uses: ./  # Refers to your custom action in the repo
+        with:
+          test_suites: 'A,B'  # We will create containers for A and B
